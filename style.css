@@ -1,0 +1,388 @@
+/* ========================================
+   DODGE BLITZ - Estilos principales
+   Estética: Neon Cyberpunk / Dark Arcade
+   ======================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --neon-cyan:    #00f5ff;
+  --neon-magenta: #ff00aa;
+  --neon-yellow:  #ffea00;
+  --neon-green:   #00ff88;
+  --bg-dark:      #0a0a0f;
+  --bg-panel:     rgba(10, 10, 20, 0.92);
+  --glow-cyan:    0 0 10px #00f5ff, 0 0 30px #00f5ff55, 0 0 60px #00f5ff22;
+  --glow-magenta: 0 0 10px #ff00aa, 0 0 30px #ff00aa55;
+  --glow-yellow:  0 0 10px #ffea00, 0 0 30px #ffea0055;
+  --font-main:    'Orbitron', monospace;
+  --font-mono:    'Share Tech Mono', monospace;
+}
+
+/* Reset */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: var(--bg-dark);
+  color: white;
+  font-family: var(--font-main);
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* ── PANTALLAS ─────────────────────────── */
+.pantalla {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.pantalla.activa { display: flex; }
+
+/* ── PANTALLA DE INICIO ─────────────────── */
+#pantalla-inicio {
+  background: var(--bg-dark);
+  gap: 24px;
+  z-index: 10;
+}
+
+.titulo-container {
+  text-align: center;
+  line-height: 1;
+  position: relative;
+  z-index: 2;
+}
+
+.titulo-glow {
+  font-size: clamp(48px, 15vw, 100px);
+  font-weight: 900;
+  color: var(--neon-cyan);
+  text-shadow: var(--glow-cyan);
+  letter-spacing: 0.2em;
+  animation: pulso 2s ease-in-out infinite;
+}
+
+.titulo-main {
+  font-size: clamp(64px, 22vw, 140px);
+  font-weight: 900;
+  color: white;
+  text-shadow:
+    0 0 20px #fff,
+    0 0 50px var(--neon-cyan),
+    0 0 100px var(--neon-cyan);
+  letter-spacing: 0.1em;
+  margin-top: -10px;
+}
+
+.subtitulo {
+  font-family: var(--font-mono);
+  font-size: clamp(11px, 3vw, 16px);
+  color: var(--neon-magenta);
+  letter-spacing: 0.5em;
+  text-shadow: var(--glow-magenta);
+  margin-top: 8px;
+}
+
+.record-inicio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  z-index: 2;
+}
+
+.label-record {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.3em;
+}
+
+#record-display {
+  font-size: clamp(20px, 6vw, 32px);
+  color: var(--neon-yellow);
+  text-shadow: var(--glow-yellow);
+  font-weight: 700;
+}
+
+.instrucciones {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 2;
+  margin-top: 4px;
+}
+
+.inst-item {
+  font-family: var(--font-mono);
+  font-size: clamp(11px, 2.5vw, 13px);
+  color: rgba(255,255,255,0.5);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Partículas de fondo */
+.particulas-fondo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.particula {
+  position: absolute;
+  border-radius: 50%;
+  animation: flotar linear infinite;
+  opacity: 0;
+}
+
+/* ── BOTONES NEON ───────────────────────── */
+.btn-neon {
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: clamp(14px, 4vw, 18px);
+  letter-spacing: 0.2em;
+  padding: 14px 48px;
+  border: 2px solid var(--neon-cyan);
+  background: transparent;
+  color: var(--neon-cyan);
+  text-shadow: var(--glow-cyan);
+  box-shadow: var(--glow-cyan), inset 0 0 20px rgba(0,245,255,0.05);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  position: relative;
+  z-index: 2;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-neon:hover, .btn-neon:active {
+  background: rgba(0,245,255,0.12);
+  box-shadow: 0 0 20px #00f5ff, 0 0 60px #00f5ff77, inset 0 0 30px rgba(0,245,255,0.15);
+  transform: scale(1.03);
+}
+
+.btn-secundario {
+  border-color: rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.5);
+  text-shadow: none;
+  box-shadow: none;
+  font-size: clamp(12px, 3vw, 14px);
+  padding: 10px 36px;
+}
+.btn-secundario:hover, .btn-secundario:active {
+  border-color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.05);
+  box-shadow: none;
+}
+
+/* ── PANTALLA DE JUEGO ──────────────────── */
+#pantalla-juego {
+  background: var(--bg-dark);
+  z-index: 1;
+}
+
+#canvas {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* HUD */
+#hud {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  z-index: 5;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+#hud-tiempo, #hud-nivel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hud-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.3em;
+}
+
+#tiempo-display {
+  font-size: clamp(22px, 6vw, 32px);
+  font-weight: 700;
+  color: var(--neon-cyan);
+  text-shadow: var(--glow-cyan);
+}
+
+#nivel-display {
+  font-size: clamp(22px, 6vw, 32px);
+  font-weight: 700;
+  color: var(--neon-magenta);
+  text-shadow: var(--glow-magenta);
+}
+
+#btn-pausa {
+  font-size: 22px;
+  background: none;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.6);
+  width: 40px; height: 40px;
+  border-radius: 8px;
+  cursor: pointer;
+  pointer-events: all;
+  -webkit-tap-highlight-color: transparent;
+  transition: all 0.15s;
+}
+#btn-pausa:active { background: rgba(255,255,255,0.1); }
+
+/* ── JOYSTICK VIRTUAL ───────────────────── */
+#joystick-area {
+  position: absolute;
+  bottom: 40px; left: 40px;
+  z-index: 5;
+  /* Solo se muestra en táctil, JS lo maneja */
+}
+
+#joystick-base {
+  width: 110px; height: 110px;
+  border-radius: 50%;
+  border: 2px solid rgba(0,245,255,0.25);
+  background: rgba(0,245,255,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+#joystick-knob {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, var(--neon-cyan), #0066aa);
+  box-shadow: var(--glow-cyan);
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  transition: box-shadow 0.1s;
+}
+
+/* ── PANTALLAS OVERLAY ──────────────────── */
+#pantalla-pausa, #pantalla-gameover {
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(6px);
+  z-index: 20;
+}
+
+.panel-overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 40px 32px;
+  border: 1px solid rgba(0,245,255,0.2);
+  background: var(--bg-panel);
+  box-shadow: 0 0 60px rgba(0,245,255,0.1), inset 0 0 40px rgba(0,0,0,0.5);
+  min-width: min(320px, 90vw);
+}
+
+.panel-titulo {
+  font-size: clamp(28px, 8vw, 48px);
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  color: white;
+  text-shadow: 0 0 20px white;
+}
+
+.gameover-titulo {
+  color: var(--neon-magenta);
+  text-shadow: var(--glow-magenta);
+}
+
+.stats-container {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.3em;
+}
+
+.stat-valor {
+  font-size: clamp(20px, 5vw, 28px);
+  font-weight: 700;
+  color: white;
+}
+
+.record-item { position: relative; }
+
+.record-valor {
+  color: var(--neon-yellow);
+  text-shadow: var(--glow-yellow);
+}
+
+.nuevo-record {
+  display: none;
+  font-family: var(--font-mono);
+  font-size: clamp(12px, 3vw, 15px);
+  color: var(--neon-yellow);
+  text-shadow: var(--glow-yellow);
+  letter-spacing: 0.2em;
+  animation: parpadeo 0.6s ease-in-out infinite;
+}
+
+.nuevo-record.visible { display: block; }
+
+/* ── ANIMACIONES ────────────────────────── */
+@keyframes pulso {
+  0%, 100% { text-shadow: var(--glow-cyan); }
+  50%       { text-shadow: 0 0 20px #00f5ff, 0 0 60px #00f5ff, 0 0 100px #00f5ff; }
+}
+
+@keyframes parpadeo {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+@keyframes flotar {
+  0%   { transform: translateY(110vh) scale(0); opacity: 0; }
+  10%  { opacity: 0.6; }
+  90%  { opacity: 0.3; }
+  100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+}
+
+/* ── RESPONSIVE DESKTOP ─────────────────── */
+@media (min-width: 768px) {
+  #joystick-area { display: none; } /* En PC no se muestra el joystick */
+
+  #btn-pausa { font-size: 18px; }
+
+  .panel-overlay {
+    padding: 48px 56px;
+    min-width: 380px;
+  }
+}

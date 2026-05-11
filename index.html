@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#0a0a0f" />
+  <meta name="description" content="Dodge Blitz - Esquiva o muere" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="apple-mobile-web-app-title" content="Dodge Blitz" />
+  <title>Dodge Blitz</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- PANTALLA DE INICIO -->
+  <div id="pantalla-inicio" class="pantalla activa">
+    <div class="titulo-container">
+      <div class="titulo-glow">DODGE</div>
+      <div class="titulo-main">BLITZ</div>
+      <div class="subtitulo">ESQUIVA O MUERE</div>
+    </div>
+    <div class="record-inicio">
+      <span class="label-record">RÉCORD</span>
+      <span id="record-display">00:00</span>
+    </div>
+    <button id="btn-jugar" class="btn-neon">JUGAR</button>
+    <div class="instrucciones">
+      <div class="inst-item">📱 <span>Joystick virtual en móvil</span></div>
+      <div class="inst-item">⌨️ <span>WASD / Flechas en PC</span></div>
+    </div>
+    <div class="particulas-fondo" id="particulas-fondo"></div>
+  </div>
+
+  <!-- PANTALLA DE JUEGO -->
+  <div id="pantalla-juego" class="pantalla">
+    <!-- HUD superior -->
+    <div id="hud">
+      <div id="hud-tiempo">
+        <span class="hud-label">TIEMPO</span>
+        <span id="tiempo-display">00:00</span>
+      </div>
+      <div id="hud-nivel">
+        <span class="hud-label">NIVEL</span>
+        <span id="nivel-display">1</span>
+      </div>
+      <button id="btn-pausa">⏸</button>
+    </div>
+
+    <!-- Canvas principal -->
+    <canvas id="canvas"></canvas>
+
+    <!-- Joystick virtual (móvil) -->
+    <div id="joystick-area">
+      <div id="joystick-base">
+        <div id="joystick-knob"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANTALLA DE PAUSA -->
+  <div id="pantalla-pausa" class="pantalla">
+    <div class="panel-overlay">
+      <div class="panel-titulo">PAUSA</div>
+      <button id="btn-continuar" class="btn-neon">CONTINUAR</button>
+      <button id="btn-menu-pausa" class="btn-neon btn-secundario">MENÚ</button>
+    </div>
+  </div>
+
+  <!-- PANTALLA DE GAME OVER -->
+  <div id="pantalla-gameover" class="pantalla">
+    <div class="panel-overlay">
+      <div class="panel-titulo gameover-titulo">GAME OVER</div>
+      <div class="stats-container">
+        <div class="stat-item">
+          <span class="stat-label">TIEMPO</span>
+          <span id="go-tiempo" class="stat-valor">00:00</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">NIVEL</span>
+          <span id="go-nivel" class="stat-valor">1</span>
+        </div>
+        <div class="stat-item record-item">
+          <span class="stat-label">RÉCORD</span>
+          <span id="go-record" class="stat-valor record-valor">00:00</span>
+        </div>
+      </div>
+      <div id="nuevo-record-msg" class="nuevo-record">¡NUEVO RÉCORD!</div>
+      <button id="btn-reiniciar" class="btn-neon">REINICIAR</button>
+      <button id="btn-menu-go" class="btn-neon btn-secundario">MENÚ</button>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
